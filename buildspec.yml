@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo "Using custom build environment"
+      - node -v
+      - npm -v
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - npm install
+  build:
+    commands:
+      - echo Running tests...
+      - npm test
+      - echo Building the application...
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+artifacts:
+  files:
+    - app.js
+    - package.json
+    - node_modules/**/*
+  discard-paths: no
