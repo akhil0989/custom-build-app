@@ -5,13 +5,18 @@ phases:
     runtime-versions:
       nodejs: 14
     commands:
-      - echo "Using custom build environment"
+      - echo "Using enhanced custom build environment"
       - node -v
       - npm -v
+      - docker --version
   pre_build:
     commands:
       - echo Installing dependencies...
       - npm install
+      - echo Running security checks...
+      - npm audit
+      - echo Running linting...
+      - npx eslint . || true
   build:
     commands:
       - echo Running tests...
@@ -20,6 +25,10 @@ phases:
       - npm run build
   post_build:
     commands:
+      - echo Running post-build security scans...
+      - pip3 list --outdated
+      - safety check
+      - echo Preparing for deployment...
       - echo Build completed on `date`
 
 artifacts:
@@ -28,3 +37,13 @@ artifacts:
     - package.json
     - node_modules/**/*
   discard-paths: no
+
+reports:
+  jest-reports:
+    files:
+      - 'test-report.xml'
+    file-format: JUNITXML
+
+cache:
+  paths:
+    - 'node_modules/**/*'
