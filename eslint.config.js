@@ -1,6 +1,5 @@
-import { defineConfig } from 'eslint';
-
-export default defineConfig({
+// eslint.config.js (CommonJS syntax)
+module.exports = {
   files: ['*.js'], // Specify the files to apply the rules to
   env: {
     node: true,
@@ -13,4 +12,4 @@ export default defineConfig({
     'no-console': 'off',  // Allow console logs
     'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
   },
-});
+};
