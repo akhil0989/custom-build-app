@@ -3,11 +3,11 @@ const app = require('../app'); // Ensure this imports your Express app
 
 let server;
 
-beforeAll((done) => {
+before((done) => {
     server = app.listen(3000, done); // Start the server before tests
 });
 
-afterAll((done) => {
+after((done) => {
     server.close(done); // Stop the server after tests
 });
 
