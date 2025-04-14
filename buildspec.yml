@@ -19,7 +19,7 @@ phases:
   build:
     commands:
       - echo Running tests...
-      - npm test  # Run tests with Jest
+      - npm test  # Run tests with Mocha
       - echo Building the application...
       - npm run build  # Run the build command (optional)
   post_build:
