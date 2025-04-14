@@ -1,14 +1,11 @@
-module.exports = {
-  extends: ['eslint:recommended'],
-  env: {
-    node: true,
-    es2021: true,
+// eslint.config.js (flat config style)
+module.exports = [
+  {
+    files: ['*.js'],
+    rules: {
+      'no-console': 'off',  // Allow console logs (remove this if not needed)
+      'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
+      // Add any other ESLint rules you prefer
+    },
   },
-  parserOptions: {
-    ecmaVersion: 12,
-  },
-  rules: {
-    'no-console': 'off',  // Optional: allows console logs in your code
-    // Add other rules as needed
-  },
-};
+];
