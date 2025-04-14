@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha",  // Changed to use Mocha instead of Jest
-    "build": "echo 'No build step defined'"  // Simple build script
+    "test": "mocha",
+    "build": "echo 'No build step defined'"
   },
   "dependencies": {
     "express": "^4.17.1"
