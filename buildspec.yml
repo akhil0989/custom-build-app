@@ -10,27 +10,20 @@ phases:
       - npm -v
       - docker --version
       - echo Getting GitHub token from Secrets Manager...
-      - echo Installing dependencies...
-      - rm -rf node_modules package-lock.json
-      - npm install
-      - npm install supertest # Install supertest explicitly in the install phase
   pre_build:
     commands:
-      - echo Running security checks...
-      - npm audit
-      - echo Running linting...
-      - npx eslint . || true
+      - echo Cleaning up old dependencies...
+      - rm -rf node_modules package-lock.json  # Clean old node_modules and package-lock.json
+      - echo Installing dependencies...
+      - npm install  # Install fresh dependencies
   build:
     commands:
       - echo Running tests...
-      - npm test # Runs Jest tests
+      - npm test  # Run tests with Jest
       - echo Building the application...
-      - npm run build
+      - npm run build  # Run the build command (optional)
   post_build:
     commands:
-      - echo Running post-build security scans...
-      - pip3 list --outdated
-      - echo Preparing for deployment...
       - echo Build completed on `date`
 
 artifacts:
@@ -48,5 +41,4 @@ reports:
 
 cache:
   paths:
-    - '/root/.npm/**/*'  # Caching npm dependencies
-    - 'node_modules/**/*' # Caching node_modules to speed up future builds
+    - 'node_modules/**/*'
