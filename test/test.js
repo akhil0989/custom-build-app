@@ -1,16 +1,15 @@
 const request = require('supertest');
-const app = require('../app'); // Import the Express app
-const server;
+const app = require('../app');  // Import the Express app
+
+let server;  // Declare `server` without initialization
 
 beforeAll((done) => {
   const port = 0;  // This tells Node to automatically pick an available port
-  server = app.listen(port, () => {
-    done();  // When the server starts, the test will proceed
-  });
+  server = app.listen(port, done); // Start the server and pass `done` to ensure Jest waits
 });
 
 afterAll((done) => {
-  server.close(done);  // Properly close the server after tests
+  server.close(done);  // Close the server after tests are done
 });
 
 describe('GET /', () => {
