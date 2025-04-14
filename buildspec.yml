@@ -11,8 +11,8 @@ phases:
       - docker --version
       - echo Getting GitHub token from Secrets Manager...
       - echo Installing dependencies...
-      - npm install        # This installs all dependencies
-      - npm install supertest  # Ensures supertest is installed if it's not in package.json
+      - npm install
+      - npm install supertest  # Ensure supertest is installed
 
   pre_build:
     commands:
@@ -34,6 +34,7 @@ phases:
     commands:
       - echo Running post-build security scans...
       - pip3 list --outdated
+      - safety check
       - echo Preparing for deployment...
       - echo Build completed on `date`
 
@@ -52,4 +53,5 @@ reports:
 
 cache:
   paths:
+    - '/root/.npm/**/*'
     - 'node_modules/**/*'
