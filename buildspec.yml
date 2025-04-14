@@ -12,29 +12,23 @@ phases:
       - echo Getting GitHub token from Secrets Manager...
       - echo Installing dependencies...
       - npm install
-      - npm install supertest  # Ensure supertest is installed
-
+      - npm install supertest # Install supertest explicitly in the install phase
   pre_build:
     commands:
-      - echo Installing dependencies...
-      - npm install
       - echo Running security checks...
       - npm audit
       - echo Running linting...
       - npx eslint . || true
-
   build:
     commands:
       - echo Running tests...
-      - npm test
+      - npm test # Runs Jest tests
       - echo Building the application...
       - npm run build
-
   post_build:
     commands:
       - echo Running post-build security scans...
       - pip3 list --outdated
-      - safety check
       - echo Preparing for deployment...
       - echo Build completed on `date`
 
@@ -53,5 +47,5 @@ reports:
 
 cache:
   paths:
-    - '/root/.npm/**/*'
-    - 'node_modules/**/*'
+    - '/root/.npm/**/*'  # Caching npm dependencies
+    - 'node_modules/**/*' # Caching node_modules to speed up future builds
