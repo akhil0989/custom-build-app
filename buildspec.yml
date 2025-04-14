@@ -11,6 +11,7 @@ phases:
       - docker --version
       - echo Getting GitHub token from Secrets Manager...
       - echo Installing dependencies...
+      - rm -rf node_modules package-lock.json
       - npm install
       - npm install supertest # Install supertest explicitly in the install phase
   pre_build:
