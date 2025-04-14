@@ -5,15 +5,15 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha"
+    "test": "mocha",  // Changed to use Mocha instead of Jest
+    "build": "echo 'No build step defined'"  // Simple build script
   },
   "dependencies": {
     "express": "^4.17.1"
   },
   "devDependencies": {
     "supertest": "^6.0.0",
-    "mocha": "^10.0.0",
-    "chai": "^4.3.4"
+    "mocha": "^10.0.0"
   },
   "author": "",
   "license": "ISC"
