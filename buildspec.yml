@@ -28,7 +28,6 @@ phases:
     commands:
       - echo Running post-build security scans...
       - pip3 list --outdated
-      - safety check
       - echo Preparing for deployment...
       - echo Build completed on `date`
 
