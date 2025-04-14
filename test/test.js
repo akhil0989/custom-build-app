@@ -1,15 +1,20 @@
 const request = require('supertest');
-const app = require('../app');  // Import the app
+const app = require('../app');  // Import the Express app
+
+let server;
+
+beforeAll((done) => {
+  server = app.listen(3000, done); // Ensure the server is running before tests start
+});
+
+afterAll((done) => {
+  server.close(done);  // Close the server after the tests are done
+});
 
 describe('GET /', () => {
   it('should return Hello, World!', async () => {
-    const response = await request(app).get('/');  // Sending GET request
-    expect(response.text).toBe('Hello, World!');  // Assert response text
-    expect(response.status).toBe(200);  // Assert response status
+    const response = await request(app).get('/');
+    expect(response.text).toBe('Hello, World!');
+    expect(response.status).toBe(200);
   });
-});
-
-// Ensure the server shuts down after the test is done (prevent Jest from hanging)
-afterAll((done) => {
-  app.close(done);
 });
