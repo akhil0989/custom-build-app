@@ -12,8 +12,7 @@
   },
   "devDependencies": {
     "supertest": "^6.0.0",
-    "jest": "^28.1.0",
-    "superagent": "^9.0.0"
+    "jest": "^28.1.0"
   },
   "author": "",
   "license": "ISC"
