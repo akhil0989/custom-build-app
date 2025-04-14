@@ -11,9 +11,9 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "supertest": "^6.0.0",  // Correct version of supertest
-    "mocha": "^10.0.0",     // Mocha for testing
-    "chai": "^4.3.4"        // Chai for assertions
+    "supertest": "^6.0.0",
+    "mocha": "^10.0.0",
+    "chai": "^4.3.4"
   },
   "author": "",
   "license": "ISC"
