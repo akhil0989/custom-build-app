@@ -10,8 +10,6 @@ phases:
       - npm -v
       - docker --version
       - echo Getting GitHub token from Secrets Manager...
-      - export GITHUB_TOKEN=$(aws secretsmanager get-secret-value --secret-id github-token --query SecretString --output text | jq -r .token)
-      - git config --global url."https://$GITHUB_TOKEN@github.com/".insteadOf "https://github.com/"
   pre_build:
     commands:
       - echo Installing dependencies...
