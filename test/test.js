@@ -5,18 +5,22 @@ const expect = chai.expect;    // Use Chai's expect
 
 let server;
 
-beforeAll((done) => {
+before(function(done) { // Mocha's before hook
     server = app.listen(3000, done); // Start the server before tests
 });
 
-afterAll((done) => {
+after(function(done) { // Mocha's after hook
     server.close(done); // Stop the server after tests
 });
 
-describe('GET /', () => {
-    it('should return Hello, World!', async () => {
-        const response = await request(app).get('/');
-        expect(response.text).to.equal('Hello, World!');  // Use Chai's expect
-        expect(response.status).to.equal(200);  // Use Chai's expect
+describe('GET /', function() {
+    it('should return Hello, World!', function(done) {
+        request(app).get('/')
+            .then((response) => {
+                expect(response.text).to.equal('Hello, World!');  // Use Chai's expect
+                expect(response.status).to.equal(200);  // Use Chai's expect
+                done(); // Finish the test
+            })
+            .catch(done); // Pass any error to Mocha's done function
     });
 });
