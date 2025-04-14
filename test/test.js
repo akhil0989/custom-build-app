@@ -9,9 +9,7 @@ beforeAll((done) => {
 });
 
 afterAll((done) => {
-  server.close(() => {
-    done();  // Ensure Jest knows the server has finished closing before finishing
-  });
+  server.close(done); // Ensure the server is closed after tests are complete
 });
 
 describe('GET /', () => {
