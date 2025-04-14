@@ -1,7 +1,7 @@
 const request = require('supertest');
-const app = require('../app');  // Import the Express app
+const app = require('../app'); // Import the Express app
 
-let server;  // Declare `server` without initialization
+let server;
 
 beforeAll((done) => {
   const port = 0;  // This tells Node to automatically pick an available port
