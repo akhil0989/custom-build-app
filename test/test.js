@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../app');
+const { app, server } = require('../app');
 const chai = require('chai');
 const expect = chai.expect;
 
@@ -8,5 +8,9 @@ describe('GET /', () => {
     const response = await request(app).get('/');
     expect(response.text).to.equal('Hello, World!');
     expect(response.status).to.equal(200);
+  });
+
+  after(() => {
+    server.close();  // Close the server after tests complete
   });
 });
