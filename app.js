@@ -2,14 +2,17 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-// Simple route
 app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
-// Start the server
-const server = app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
+// Don't start the server here, just export the app
+// module.exports = app;  <-- this line is correct for testing
 
-module.exports = { app, server };  // Export both app and server for testing purposes
+if (require.main === module) { // This ensures server starts only if run directly
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}`);
+    });
+}
+
+module.exports = app; // Exporting the app for testing
