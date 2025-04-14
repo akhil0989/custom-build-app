@@ -10,6 +10,10 @@ phases:
       - npm -v
       - docker --version
       - echo Getting GitHub token from Secrets Manager...
+      - echo Installing dependencies...
+      - npm install        # This installs all dependencies
+      - npm install supertest  # Ensures supertest is installed if it's not in package.json
+
   pre_build:
     commands:
       - echo Installing dependencies...
@@ -18,12 +22,14 @@ phases:
       - npm audit
       - echo Running linting...
       - npx eslint . || true
+
   build:
     commands:
       - echo Running tests...
       - npm test
       - echo Building the application...
       - npm run build
+
   post_build:
     commands:
       - echo Running post-build security scans...
