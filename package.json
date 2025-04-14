@@ -5,14 +5,15 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "jest"
+    "test": "mocha"
   },
   "dependencies": {
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "supertest": "^6.0.0",
-    "jest": "^28.1.0"
+    "supertest": "^6.0.0",  // Correct version of supertest
+    "mocha": "^10.0.0",     // Mocha for testing
+    "chai": "^4.3.4"        // Chai for assertions
   },
   "author": "",
   "license": "ISC"
