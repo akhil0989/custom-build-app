@@ -6,6 +6,9 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
+// We need to export the app instance for testing
+module.exports = app;
+
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
