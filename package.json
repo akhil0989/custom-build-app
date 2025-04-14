@@ -14,7 +14,7 @@
   "devDependencies": {
     "supertest": "^6.0.0",
     "mocha": "^10.0.0",
-    "chai": "^4.3.4"  // Add chai here
+    "chai": "^4.3.4"
   },
   "author": "",
   "license": "ISC"
