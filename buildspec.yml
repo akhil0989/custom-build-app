@@ -11,7 +11,8 @@ phases:
       - docker --version
       - echo Getting GitHub token from Secrets Manager...
       - export GITHUB_TOKEN=$(aws secretsmanager get-secret-value --secret-id github-token --query SecretString --output text | jq -r .token)
-      - git config --global url."https://$GITHUB_TOKEN@github.com/".insteadOf "https://github.com/"
+      - GITHUB_TOKEN_ESCAPED=$(echo $GITHUB_TOKEN | jq -sRr @uri)  # This escapes special characters
+      - git config --global url."https://$GITHUB_TOKEN_ESCAPED@github.com/".insteadOf "https://github.com/"
   pre_build:
     commands:
       - echo Installing dependencies...
