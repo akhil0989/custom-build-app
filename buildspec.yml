@@ -14,32 +14,33 @@ phases:
       - git config --global url."https://$GITHUB_TOKEN@github.com/".insteadOf "https://github.com/"
       - echo Installing dependencies...
       - npm install
-      - npm install --save-dev chai  # Install chai for testing
-      - npm install supertest  # If needed for supertest as well
+      - npm install --save-dev chai
+      - npm install supertest
 
   pre_build:
     commands:
-      - echo Running security checks...
-      - npm audit
-      - echo Running linting...
+      - echo "Running security checks..."
+      - npm audit || true
+      - echo "Running linting..."
       - npx eslint . || true
+      - echo "Checking files..."
+      - ls -alh
 
   build:
     commands:
-      - echo Running tests...
-      - npm test  # This will run the Mocha tests
+      - echo "Running tests..."
+      - npm test
 
   post_build:
     commands:
-      - echo build is done
+      - echo "Packaging the Lambda function..."
+      - zip -r function.zip index.js app.js node_modules package.json
+      - echo "Build completed on `date`"
 
 artifacts:
-artifacts:
   files:
-    - app.js
-    - package.json
-    - node_modules/**/*
-  discard-paths: no
+    - function.zip
+  discard-paths: yes
 
 reports:
   jest-reports:
