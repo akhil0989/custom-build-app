@@ -10,20 +10,25 @@ phases:
       - npm -v
       - docker --version
       - echo Getting GitHub token from Secrets Manager...
+      - export GITHUB_TOKEN=$(aws secretsmanager get-secret-value --secret-id github-token --query SecretString --output text | jq -r .token)
+      - git config --global url."https://$GITHUB_TOKEN@github.com/".insteadOf "https://github.com/"
       - echo Installing dependencies...
       - npm install
       - npm install --save-dev chai  # Install chai for testing
       - npm install supertest  # If needed for supertest as well
+
   pre_build:
     commands:
       - echo Running security checks...
       - npm audit
       - echo Running linting...
       - npx eslint . || true
+
   build:
     commands:
       - echo Running tests...
       - npm test  # This will run the Mocha tests
+
   post_build:
     commands:
       - echo Build completed on `date`
@@ -32,7 +37,7 @@ artifacts:
   files:
     - app.js
     - package.json
-    - node_modules/**/*  # Include node_modules if needed
+    - node_modules/**/*
   discard-paths: no
 
 reports:
