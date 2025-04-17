@@ -31,14 +31,15 @@ phases:
 
   post_build:
     commands:
-      - echo Packaging the Lambda function...
-      - zip -r function.zip index.js app.js node_modules package.json
-      - echo Build completed on `date`
+      - echo build is done
 
 artifacts:
+artifacts:
   files:
-    - function.zip
-  discard-paths: yes
+    - app.js
+    - package.json
+    - node_modules/**/*
+  discard-paths: no
 
 reports:
   jest-reports:
